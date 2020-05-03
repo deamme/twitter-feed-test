@@ -8,7 +8,7 @@ if (process.argv.length !== 4) {
 const usersFilePath = process.argv[2]
 const tweetsFilePath = process.argv[3]
 
-async function printFeed(parsedUsersContent, parsedTweetsContent) {
+function printFeed(parsedUsersContent, parsedTweetsContent) {
   parsedUsersContent.forEach(list => {
     const name: string = list[0]
     const following: string[] = list[1]
