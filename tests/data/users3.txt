@@ -1,0 +1,18 @@
+
+
+Michael follows   Kent,   Veronica    .dfgdfgfdg , asdassadas, follows , , , , 
+
+Kent follows Vitalik
+
+
+Michael follows Vitalik, Kent
+Veronica follows Michael, Vitalik, veronica
+Vitalik follows Veronica
+
+
+
+
+
+
+
+

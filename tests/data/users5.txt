@@ -1,0 +1,5 @@
+Michael foll Kent, Veronica
+Kent follows Vitalik
+Michael follows Vitalik, Kent
+Veronica follows Michael, Vitalik, veronica
+Vitalik follows Veronica

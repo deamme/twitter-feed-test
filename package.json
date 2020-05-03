@@ -1,0 +1,20 @@
+{
+  "name": "twitter-feed",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "ts-node tests"
+  },
+  "author": "Deam",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
+    "@types/node": "^13.13.4",
+    "@types/tape": "^4.13.0",
+    "tape": "^5.0.0",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "fs-extra": "^9.0.0"
+  }
+}

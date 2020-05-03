@@ -1,0 +1,5 @@
+Michael follows Kent, veronica, follows
+Kent follows Vitalik
+Michael follows Vitalik, Kent
+Veronica follows Michael, Vitalik
+Vitalik follows veronica
