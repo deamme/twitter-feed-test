@@ -1,3 +1,4 @@
+import * as os from 'os'
 import { pathExists, readFile } from 'fs-extra'
 
 // Check if files exist
@@ -14,6 +15,7 @@ export async function checkIfFilesExists(usersFilePath: string, tweetsFilePath: 
 }
 
 function checkUsersContentFormat(fileContent: String) {
+  const isWindows = os.platform() === 'win32'
   const errorMessage = 'Seems like your users file has incorrect format'
   // Match only words (case insensitive) and ignore whitespace etc.
   const regex = /[a-z]+/gi
@@ -21,8 +23,8 @@ function checkUsersContentFormat(fileContent: String) {
   return (
     fileContent
       // Split by line and remove empty lines
-      .split('\r\n')
-      .filter(text => text !== '')
+      .split(isWindows ? '\r\n' : '\n')
+      .filter((text) => text !== '')
       // Split by the first instance of "follows" keyword
       // We want to support "follows" as a username too
       .map((text, index) => {
@@ -55,12 +57,12 @@ function checkUsersContentFormat(fileContent: String) {
 
         list[1] = following
           .split(', ')
-          .filter(text => text.match(regex))
-          .map(text => {
+          .filter((text) => text.match(regex))
+          .map((text) => {
             return text.match(regex)[0]
           })
           // Make sure you can't follow yourself
-          .filter(text => text.toLowerCase() !== name.toLowerCase())
+          .filter((text) => text.toLowerCase() !== name.toLowerCase())
 
         return list
       })
@@ -81,7 +83,7 @@ export async function parseUsersFile(usersFilePath: string) {
         const currentFollowing: string[] = currentValue[1]
         let foundMatch = false
 
-        accumulator = accumulator.map(list => {
+        accumulator = accumulator.map((list) => {
           const matchedName: string = list[0]
           const matchedFollowing: string[] = list[1]
 
@@ -103,18 +105,18 @@ export async function parseUsersFile(usersFilePath: string) {
 
         return accumulator
       },
-      [],
+      []
     )
 
-    const names = parsedContent.map(list => list[0])
+    const names = parsedContent.map((list) => list[0])
     const followings = parsedContent.reduce((accumulator, currentValue) => accumulator.concat(currentValue[1]), [])
 
     // We also want to have an entry for users that are not already on the initial list
     followings
-      .filter(following => {
-        return !names.filter(name => name.toLowerCase() === following.toLowerCase()).length
+      .filter((following) => {
+        return !names.filter((name) => name.toLowerCase() === following.toLowerCase()).length
       })
-      .forEach(name => {
+      .forEach((name) => {
         parsedContent.push([name, []])
       })
 
@@ -138,6 +140,7 @@ export async function parseUsersFile(usersFilePath: string) {
 }
 
 function checkTweetsContentFormat(fileContent: string) {
+  const isWindows = os.platform() === 'win32'
   const errorMessage = 'Seems like your tweets file has incorrect format'
   // Match only words (case insensitive) and ignore whitespace etc.
   const regex = /[a-z]+/gi
@@ -145,8 +148,8 @@ function checkTweetsContentFormat(fileContent: string) {
   return (
     fileContent
       // Split by line and remove empty lines
-      .split('\r\n')
-      .filter(text => text !== '')
+      .split(isWindows ? '\r\n' : '\n')
+      .filter((text) => text !== '')
       // Split by the first instance of "> "
       // We want to support that a message can contain "> "
       .map((text, index) => {
