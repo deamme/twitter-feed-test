@@ -105,7 +105,7 @@ test('Check tweets file content format - Valid format (normal)', async t => {
     await parseTweetsFile('./tests/data/tweets1.txt')
     t.pass()
   } catch (error) {
-    t.fail()
+    t.fail(error)
   }
   t.end()
 })
@@ -115,7 +115,7 @@ test('Check tweets file content format - Valid format (empty lines)', async t =>
     await parseTweetsFile('./tests/data/tweets2.txt')
     t.pass()
   } catch (error) {
-    t.fail()
+    t.fail(error)
   }
   t.end()
 })
@@ -125,7 +125,7 @@ test('Check tweets file content format - Valid format (weird content)', async t 
     await parseTweetsFile('./tests/data/tweets3.txt')
     t.pass()
   } catch (error) {
-    t.fail()
+    t.fail(error)
   }
   t.end()
 })
@@ -166,7 +166,7 @@ test('Parsed tweets file - Correct length', async t => {
 
     t.assert(parsedContent.length === 5)
   } catch (error) {
-    t.fail()
+    t.fail(error)
   }
   t.end()
 })
